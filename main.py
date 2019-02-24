@@ -9,7 +9,7 @@ import argparse
 
 SCOPES = 'https://www.googleapis.com/auth/calendar'
 service = None
-UTC_OFFSET = '-08:00'
+UTC_OFFSET = ':00-08:00'
 
 
 def initialize():
@@ -112,7 +112,7 @@ def parse():
     parser.add_argument("--end", help="The end time of the calendar event, ex. 2019-02-20T11:00")
     args = parser.parse_args()
 
-    start_time = args.start + ":00" + UTC_OFFSET
+    start_time = args.start + UTC_OFFSET
 
     if args.end:
         end_time = args.end + UTC_OFFSET
