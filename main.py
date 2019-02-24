@@ -20,7 +20,6 @@ def initialize():
     global service
 
     creds = None
-    credentials_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "", "credentials.json")
 
     if os.path.exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
@@ -30,7 +29,7 @@ def initialize():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                credentials_path, SCOPES)
+                'credentials.json', SCOPES)
             creds = flow.run_local_server()
         # Save the credentials for the next run
         with open('token.pickle', 'wb') as token:
@@ -72,7 +71,7 @@ def get_notification_priority(priority):
     """
     Get how often reminders should be sent through Google Calendar Poups
     :param priority: The priority of the event (high, normal, none)
-    :return: How often reminders will be sent high = 7 days in adv, normal = 3 days in adv, none = no notifications
+    :return: How often reminders will be sent high = 5 days in adv, normal = 3 days in adv, none = no notifications
     """
     if priority == 'high':
         # Popups 5 days in advance
