@@ -10,6 +10,7 @@ import argparse
 SCOPES = 'https://www.googleapis.com/auth/calendar'
 service = None
 UTC_OFFSET = ':00-08:00'
+CREDENTIALS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "", "credentials.json")
 
 
 def initialize():
@@ -29,7 +30,7 @@ def initialize():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+                CREDENTIALS_PATH, SCOPES)
             creds = flow.run_local_server()
         # Save the credentials for the next run
         with open('token.pickle', 'wb') as token:
@@ -85,7 +86,7 @@ def get_notification_priority(priority):
         return notifications
 
     elif priority == 'normal':
-        # Popups 2 days in advance
+        # Popups 3 days in advance
         notifications = [
             {'method': 'popup', 'minutes': 24 * 60},
             {'method': 'popup', 'minutes': 48 * 60},
