@@ -9,7 +9,7 @@ import argparse
 
 SCOPES = 'https://www.googleapis.com/auth/calendar'
 service = None
-UTC_OFFSET = ':00-08:00'
+UTC_OFFSET = ':00-07:00'
 CREDENTIALS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "", "credentials.json")
 
 
