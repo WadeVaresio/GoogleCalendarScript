@@ -11,7 +11,7 @@ SCOPES = 'https://www.googleapis.com/auth/calendar'
 service = None
 UTC_OFFSET = ':00-07:00'
 CREDENTIALS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "", "credentials.json")
-
+TOKEN_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "", "token.pickle")
 
 def initialize():
     """
@@ -22,7 +22,7 @@ def initialize():
 
     creds = None
 
-    if os.path.exists('token.pickle'):
+    if os.path.normpath(TOKEN_PATH).exists('token.pickle'):
         with open('token.pickle', 'rb') as token:
             creds = pickle.load(token)
     if not creds or not creds.valid:
