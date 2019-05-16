@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 
+import argparse
 import os
 import pickle
-from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
+
 from google.auth.transport.requests import Request
-import argparse
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
 
 SCOPES = 'https://www.googleapis.com/auth/calendar'
 service = None
 UTC_OFFSET = ':00-07:00'
+
 CREDENTIALS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "", "credentials.json")
+TOKEN_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "", "token.pickle")
 
 
 def initialize():
@@ -22,8 +25,9 @@ def initialize():
 
     creds = None
 
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
+    # if the directory of the script contains toke.pickle
+    if os.path.exists(TOKEN_PATH):
+        with open(TOKEN_PATH, 'rb') as token:
             creds = pickle.load(token)
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
@@ -33,7 +37,7 @@ def initialize():
                 CREDENTIALS_PATH, SCOPES)
             creds = flow.run_local_server()
         # Save the credentials for the next run
-        with open('token.pickle', 'wb') as token:
+        with open(TOKEN_PATH, 'wb') as token:
             pickle.dump(creds, token)
 
     service = build('calendar', 'v3', credentials=creds)
