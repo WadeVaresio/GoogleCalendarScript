@@ -15,6 +15,9 @@ Example:
 This will create a google calendar event with the title "Event Name" on February 20, 2019 at 8:00AM with notifications five days in advance
 For help run ``python3 main.py -h``
 
+### Suggested Terminal Usage
+Add the calevent python file to wherever you like to keep your exectuable scripts, then export this path to your PATH.
+
 #### Time Parameter
 For information on the formatting of the start and end time parameters refer to [this.](https://tools.ietf.org/html/rfc3339#section-5.8)
 
@@ -23,7 +26,3 @@ How often you will receive notifications of the event
 * high - 7 days in advance
 * normal - 3 days in advance
 * none - no notifications
-
-## Alias
-There is an alias calevent which runs the main python file found in ~/PycharmProjects/GoogleCalendarScript
-Example: `` calevent "event name" 2019-02-20T10:00 none``

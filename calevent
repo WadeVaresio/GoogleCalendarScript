@@ -12,8 +12,8 @@ SCOPES = 'https://www.googleapis.com/auth/calendar'
 service = None
 UTC_OFFSET = ':00-07:00'
 
-CREDENTIALS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "", "credentials.json")
-TOKEN_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "", "token.pickle")
+CREDENTIALS_PATH = f"{os.path.dirname(os.path.abspath(__file__))}/credentials.json"
+TOKEN_PATH = f"{os.path.dirname(os.path.abspath(__file__))}/token.pickle"
 
 
 def initialize():
@@ -80,28 +80,22 @@ def get_notification_priority(priority):
     """
     if priority == 'high':
         # Popups 5 days in advance
-        notifications = [
+        return [
             {'method': 'popup', 'minutes': 24 * 60},
             {'method': 'popup', 'minutes': 48 * 60},
             {'method': 'popup', 'minutes': 72 * 60},
             {'method': 'popup', 'minutes': 96 * 60},
             {'method': 'popup', 'minutes': 120 * 60}]
 
-        return notifications
-
     elif priority == 'normal':
         # Popups 3 days in advance
-        notifications = [
+        return [
             {'method': 'popup', 'minutes': 24 * 60},
             {'method': 'popup', 'minutes': 48 * 60},
             {'method': 'popup', 'minutes': 72 * 60}]
 
-        return notifications
-
     else:
-        notifications = []
-
-        return notifications
+        return []
 
 
 def parse():
